@@ -17,7 +17,7 @@ class ArtworkSeeder extends Seeder
             [
                 'title' => 'Starry Night',
                 'genre' => 'Post-Impressionism',
-                'image' => 'starry_night.jpg',
+                'image' => 'ArtGallery_app/public/images/starry_night.jpg',
                 'description' => 'A famous painting by Vincent van Gogh.',
                 'artist' => 'Vincent van Gogh',
                 'year' => '1889-06-01',
@@ -27,7 +27,7 @@ class ArtworkSeeder extends Seeder
             [
                 'title' => 'Mona Lisa',
                 'genre' => 'Renaissance',
-                'image' => 'mona_lisa.jpg',
+                'image' => 'images/mona_lisa.jpg',
                 'description' => 'A portrait painting by Leonardo da Vinci.',
                 'artist' => 'Leonardo da Vinci',
                 'year' => '1503-10-01',
@@ -43,6 +43,17 @@ class ArtworkSeeder extends Seeder
                 'year' => '1931-04-01',
                 'price' => '$150 million',
                 'comments' => "Known for its melting clocks.",
+            ],
+
+            [
+                'title' => 'Morbid Land',
+                'genre' => 'Surrealism',
+                'image' => 'morbid_land.jpg',
+                'description' => 'Painting made b y me :).',
+                'artist' => 'Diana Kovika',
+                'year' => '2023-01-01',
+                'price' => '$1000 million',
+                'comments' => "Amazing",
             ],
         ]);
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ArtworkController; // i added this
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,4 +18,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks.index');
+Route::get('/artworks/{book}', [ArtworkController::class, 'show'])->name('artworks.show');
+
+// i added this :
+
+// Route::get('/artworks', function () {
+//     return 'This is the Artworks page!';
+// });
+
 require __DIR__.'/auth.php';
+
+

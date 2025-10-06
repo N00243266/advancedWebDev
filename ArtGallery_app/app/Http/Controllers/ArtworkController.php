@@ -12,6 +12,9 @@ class ArtworkController extends Controller
      */
     public function index()
     {
+        $artworks = Artwork::all();
+        $artworks = \App\Models\Artwork::all(); // fetch all records from artworks table
+        return view('artworks.index', compact('artworks'));
         //
     }
 
@@ -36,6 +39,7 @@ class ArtworkController extends Controller
      */
     public function show(Artwork $artwork)
     {
+        return view('artworks.show')->with('artwork', $artwork);
         //
     }
 

@@ -10,14 +10,16 @@ class Artwork extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
-    //     'title',
-    //     'genre',
-    //     'image',
-    //     'description',
-    //     'artist',
-    //     'year',
-    //     'price',
-    //     'comments',
-    // ];
+     protected $fillable = [
+         'title',
+         'genre',
+         'image',
+         'description',
+         'artist',
+         'year',
+         'price',
+        // 'comments',
+     ];
+
+
 }
