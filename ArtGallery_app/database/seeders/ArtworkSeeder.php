@@ -45,16 +45,7 @@ class ArtworkSeeder extends Seeder
                 'comments' => "Known for its melting clocks.",
             ],
 
-            [
-                'title' => 'Morbid Land',
-                'genre' => 'Surrealism',
-                'image' => 'morbid_land.jpg',
-                'description' => 'Painting made b y me :).',
-                'artist' => 'Diana Kovika',
-                'year' => '2023-01-01',
-                'price' => '$1000 million',
-                'comments' => "Amazing",
-            ],
+          
         ]);
 
     }

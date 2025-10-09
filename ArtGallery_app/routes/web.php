@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ArtworkController; // i added this
+use App\Http\Controllers\ArtworkController; 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,13 +19,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks.index');
-Route::get('/artworks/{book}', [ArtworkController::class, 'show'])->name('artworks.show');
+Route::get('/artworks/create', [ArtworkController::class, 'create'])->name('artworks.create');
+Route::get('/artworks/{artwork}', [ArtworkController::class, 'show'])->name('artworks.show');
+Route::post('/artworks', [ArtworkController::class, 'store'])->name('artworks.store');
 
-// i added this :
-
-// Route::get('/artworks', function () {
-//     return 'This is the Artworks page!';
-// });
 
 require __DIR__.'/auth.php';
 
