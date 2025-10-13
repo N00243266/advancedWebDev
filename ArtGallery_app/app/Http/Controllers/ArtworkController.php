@@ -74,7 +74,8 @@ class ArtworkController extends Controller
      */
     public function edit(Artwork $artwork)
     {
-        //
+        
+        return view('artworks.edit', compact('artwork'));
     }
 
     /**
@@ -82,7 +83,25 @@ class ArtworkController extends Controller
      */
     public function update(Request $request, Artwork $artwork)
     {
-        //
+        $request->validate([
+        'title' => 'required|string|max:255',
+        'genre' => 'required|string|max:255',
+        'year' => 'required|date',
+        'artist' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'comments' => 'nullable|string',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+    ]);
+
+    if ($request->hasFile('image')) {
+        $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+        $request->file('image')->move(public_path('images'), $imageName);
+        $artwork->image = $imageName;
+    }
+
+    $artwork->update($request->only(['title', 'genre', 'year', 'artist', 'price', 'comments']));
+
+    return redirect()->route('artworks.index')->with('success', 'Artwork updated successfully!');
     }
 
     /**

@@ -18,6 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+Route::get('/artworks/{artwork}/edit', [ArtworkController::class, 'edit'])->name('artworks.edit');
+Route::put('/artworks/{artwork}', [ArtworkController::class, 'update'])->name('artworks.update');
+
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks.index');
 Route::get('/artworks/create', [ArtworkController::class, 'create'])->name('artworks.create');
 Route::get('/artworks/{artwork}', [ArtworkController::class, 'show'])->name('artworks.show');
