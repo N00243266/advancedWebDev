@@ -22,6 +22,7 @@ Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks.ind
 Route::get('/artworks/create', [ArtworkController::class, 'create'])->name('artworks.create');
 Route::get('/artworks/{artwork}', [ArtworkController::class, 'show'])->name('artworks.show');
 Route::post('/artworks', [ArtworkController::class, 'store'])->name('artworks.store');
+Route::delete('/artworks/{artwork}', [ArtworkController::class, 'destroy'])->name('artworks.destroy'); 
 
 
 require __DIR__.'/auth.php';

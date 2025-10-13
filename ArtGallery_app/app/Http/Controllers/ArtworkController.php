@@ -90,6 +90,11 @@ class ArtworkController extends Controller
      */
     public function destroy(Artwork $artwork)
     {
-        //
+    if ($artwork->image && file_exists(public_path('images/' . $artwork->image))) {
+        unlink(public_path('images/' . $artwork->image));
+    }
+    $artwork->delete();
+
+    return redirect()->route('artworks.index')->with('success', 'Artwork deleted successfully!');
     }
 }

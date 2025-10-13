@@ -25,6 +25,17 @@
                             <p><strong>Price:</strong> ${{ $artwork->price }}</p>
                             <p><strong>Comments:</strong> {{ $artwork->comments }}</p>
                         </div>
+
+                         <!-- Delete Button -->
+                    <form action="{{ route('artworks.destroy', $artwork->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this artwork?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                            Delete Artwork
+                        </button>
+                    </form>
+
+
                     </div>
                 </div>
             </div>
