@@ -16,9 +16,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg mb-4">List of all Artworks:</h3>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 space-y-4">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($artworks as $artwork)
+                        <div class="border p-4 rounded-lg shadow-md">
                         <a href="{{ route('artworks.show', $artwork) }}"> 
                             <x-artwork-card 
                                 :title="$artwork->title"
@@ -33,11 +34,11 @@
 
                         </a>
                                  <!-- Edit Button -->
-                          <div class="flex justify-space-between">
-                        <a href="{{ route('artworks.edit', $artwork) }}" class="mt-4 px-4 py-2 bg-blue rounded-md hover:bg-blue-700">
+                          <div class="mt-flex space-x-2">
+                        <a href="{{ route('artworks.edit', $artwork) }}" class="bg-orange-500 rounded-md hover:bg-orange-700">
                             Edit
                         </a>
-                         </div>
+                   
                         
 
                               <!-- Delete Button -->
@@ -49,7 +50,8 @@
                         </button>
                     </form>
                         
-                
+                     </div>
+                    </div>
                         @endforeach
                     </div>
                 </div>
