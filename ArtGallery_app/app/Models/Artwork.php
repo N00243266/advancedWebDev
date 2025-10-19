@@ -19,6 +19,7 @@ class Artwork extends Model
          'year',
          'price',
          'comments',
+          'liked',
      ];
 
 

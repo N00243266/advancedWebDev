@@ -25,6 +25,8 @@
             <p class="text-sm text-gray-500">{{ $comments }} </p>
         </div>
     </div>
+    
+
 
     
 

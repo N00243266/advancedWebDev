@@ -10,6 +10,8 @@ class ArtworkController extends Controller
    
     public function index()
     {
+
+        
         $artworks = Artwork::all();
         // $artworks = \App\Models\Artwork::all();
         return view('artworks.index', compact('artworks'));
@@ -21,7 +23,9 @@ class ArtworkController extends Controller
      */
     public function create()
     {
-        return view('artworkscreate');
+       
+        return view('artworks.create');
+
     }
 
     /**
@@ -116,4 +120,25 @@ class ArtworkController extends Controller
 
     return redirect()->route('artworks.index')->with('success', 'Artwork deleted successfully!');
     }
+
+
+
+    // Like system methods
+
+    public function toggleLike(Artwork $artwork)
+{
+    $artwork->liked = !$artwork->liked; // flip the value
+    $artwork->save();
+
+    return back();
+}
+
+    public function liked()
+{
+    $artworks = Artwork::where('liked', true)->get();
+    return view('artworks.liked', compact('artworks'));
+}
+
+
+
 }

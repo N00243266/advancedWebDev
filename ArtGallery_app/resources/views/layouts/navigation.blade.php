@@ -22,6 +22,9 @@
                     <x-nav-link :href="route('artworks.create')" :active="request()->routeIs('artworks.create')">
                         {{ __('Create New Artwork') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('artworks.liked')" :active="request()->routeIs('artworks.liked')">
+                        {{ __('❤️ Liked Artworks') }}
+                    </x-nav-link>
                 </div>
             </div>
 

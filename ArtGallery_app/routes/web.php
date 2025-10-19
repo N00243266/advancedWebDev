@@ -28,6 +28,10 @@ Route::get('/artworks/{artwork}', [ArtworkController::class, 'show'])->name('art
 Route::post('/artworks', [ArtworkController::class, 'store'])->name('artworks.store');
 Route::delete('/artworks/{artwork}', [ArtworkController::class, 'destroy'])->name('artworks.destroy'); 
 
+//  Like system
+Route::post('/artworks/{artwork}/toggle-like', [ArtworkController::class, 'toggleLike'])->name('artworks.toggleLike');
+Route::get('/liked-artworks', [ArtworkController::class, 'liked'])->name('artworks.liked');
+
 
 require __DIR__.'/auth.php';
 
