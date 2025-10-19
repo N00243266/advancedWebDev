@@ -1,3 +1,4 @@
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -13,8 +14,19 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <!-- Image -->
-                        <div>
-                            <img src="{{ asset('images/' . $artwork->image) }}" alt="{{ $artwork->title }}" class="w-full h-auto object-cover rounded-lg">
+                        <div class="relative overflow-hidden group w-full max-w-lg mx-auto">
+                            <img 
+                                src="{{ asset('images/' . $artwork->image) }}" 
+                                alt="{{ $artwork->title }}" 
+                                class="w-full h-auto object-cover rounded-lg transform transition-transform duration-500 ease-in-out group-hover:scale-125 cursor-zoom-in"
+                            >
+
+                            <!-- Magnifying glass icon appears on hover -->
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-10 h-10 drop-shadow-lg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.2-5.2m0 0A7 7 0 1010 17.8a7 7 0 005.8-2z" />
+                                </svg>
+                            </div>
                         </div>
 
                         <!-- Details -->
@@ -25,8 +37,11 @@
                             <p><strong>Price:</strong> ${{ $artwork->price }}</p>
                             <p><strong>Comments:</strong> {{ $artwork->comments }}</p>
                         </div>
+                    </div>
 
-                        <form action="{{ route('artworks.toggleLike', $artwork->id) }}" method="POST" class="mt-2">
+                    <!-- Button Container -->
+                    <div class="flex justify-between items-center mt-4">
+                        <form action="{{ route('artworks.toggleLike', $artwork->id) }}" method="POST" class="flex items-center">
                             @csrf
                             <button type="submit" class="focus:outline-none">
                                 @if($artwork->liked)
@@ -50,23 +65,19 @@
                             </button>
                         </form>
 
-                            <!-- Edit Button -->
-                            <div class="flex justify-between">
-                                <a href="{{ route('artworks.edit', $artwork->id) }}" class="mt-4 px-4 py-2 text-black rounded-md ">
-                                    Edit 
-                                </a>
+                        <!-- Edit Button -->
+                        <a href="{{ route('artworks.edit', $artwork->id) }}" class="mt-4 px-4 py-2 text-black rounded-md">
+                            Edit 
+                        </a>
 
-
-                         <!-- Delete Button -->
-                    <form action="{{ route('artworks.destroy', $artwork->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this artwork?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
-                            Delete Artwork
-                        </button>
-                    </form>
-
-
+                        <!-- Delete Button -->
+                        <form action="{{ route('artworks.destroy', $artwork->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this artwork?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                                Delete Artwork
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
