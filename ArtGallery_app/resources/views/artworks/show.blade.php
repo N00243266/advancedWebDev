@@ -39,6 +39,30 @@
                         </div>
                     </div>
 
+
+                    @if(!empty($topColors))
+    <div class="mt-6">
+        <h4 class="font-semibold mb-2">Color Palette:</h4>
+        <div class="flex space-x-2">
+            @foreach($topColors as $color)
+                @php
+                    // Convert integer color to hex code
+                    $hex = sprintf("#%06X", $color);
+                @endphp
+                <div 
+                    class="w-10 h-10 rounded-md border shadow-sm" 
+                    style="background-color: {{ $hex }}" 
+                    title="{{ $hex }}">
+                </div>
+            @endforeach
+        </div>
+    </div>
+@endif
+
+
+        
+
+
                     <!-- Button Container -->
                     <div class="flex justify-between items-center mt-4">
                         <form action="{{ route('artworks.toggleLike', $artwork->id) }}" method="POST" class="flex items-center">

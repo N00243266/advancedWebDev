@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Artwork;
 use Illuminate\Http\Request; 
+use League\ColorExtractor\Palette;  //for color palette
+use League\ColorExtractor\ColorExtractor; //for color extraction
 
 class ArtworkController extends Controller
 {
@@ -68,9 +70,47 @@ class ArtworkController extends Controller
      */
     public function show(Artwork $artwork)
     {
-        // return view('artworks.show')->with('artwork', $artwork);
-        return view('artworks.show', compact('artwork'));
-        //
+       $topColors = [];
+
+try {
+    $imagePath = public_path('images/' . $artwork->image);
+
+    if (file_exists($imagePath)) {
+        $palette = Palette::fromFilename($imagePath);
+        $extractor = new ColorExtractor($palette);
+        $colors = $extractor->extract(10);
+
+        foreach ($colors as $color) {
+            [$r, $g, $b] = [
+                ($color >> 16) & 0xFF,
+                ($color >> 8) & 0xFF,
+                $color & 0xFF,
+            ];
+
+            $brightness = ($r * 0.299 + $g * 0.587 + $b * 0.114);
+            if ($brightness < 25 || $brightness > 245) continue; // adjusted brightness filter
+
+            $max = max($r, $g, $b);
+            $min = min($r, $g, $b);
+            $saturation = ($max - $min) / max($max, 1);
+            if ($saturation < 0.15) continue; // adjusted saturation filter
+
+            $topColors[] = $color;
+            if (count($topColors) >= 5) break; // stop when we have 5 good colors
+        }
+
+        //  fallback AFTER the loop to ensure we have 5 colors
+        if (count($topColors) < 5) {
+            $remaining = array_diff($colors, $topColors);
+            $topColors = array_merge($topColors, array_slice($remaining, 0, 5 - count($topColors)));
+        }
+    }
+} catch (\Exception $e) {
+    // silently ignore errors
+}
+
+
+    return view('artworks.show', compact('artwork', 'topColors'));
     }
 
     /**
@@ -138,6 +178,7 @@ class ArtworkController extends Controller
     $artworks = Artwork::where('liked', true)->get();
     return view('artworks.liked', compact('artworks'));
 }
+
 
 
 

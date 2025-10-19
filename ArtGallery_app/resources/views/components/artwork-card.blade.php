@@ -25,7 +25,7 @@
             <p class="text-sm text-gray-900 mb-1">Artist: {{ $artist }}</p>
         </div>
         <div class="mt-auto">
-            <p class="font-semibold text-white">Price: ${{ $price }}</p>
+            <p class="font-semibold text-gray-400">Price: ${{ $price }}</p>
             <p class="text-sm text-gray-900">{{ $comments }}</p>
         </div>
     </div>
