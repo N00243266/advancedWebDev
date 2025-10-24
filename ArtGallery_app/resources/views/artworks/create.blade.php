@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">           <!-- header for create artwork page -->
             {{ __('Create Artwork') }}
         </h2>
     </x-slot>
@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg mb-4">Create a New Artwork</h3>
 
-                    <x-artwork-form action="{{ route('artworks.store') }}" method="POST">
+                    <x-artwork-form action="{{ route('artworks.store') }}" method="POST">       <!-- Use POST method for creating new artwork -->
           
 
 

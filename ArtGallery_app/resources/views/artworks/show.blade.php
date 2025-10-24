@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Artwork Details') }}
+            {{ __('Artwork Details') }}                                         <!-- header for artwork details page -->
         </h2>
     </x-slot>
 
@@ -10,7 +10,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h3 class="font-semibold text-lg mb-4">{{ $artwork->title }}</h3>
+                    <h3 class="font-semibold text-lg mb-4">{{ $artwork->title }}</h3>                       <!-- subtitle showing artwork title -->
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <!-- Image -->
@@ -42,7 +42,7 @@
 
                     @if(!empty($topColors))
     <div class="mt-6">
-        <h4 class="font-semibold mb-2">Color Palette:</h4>
+        <h4 class="font-semibold mb-2">Color Palette:</h4>                  <!-- subtitle for color palette -->
         <div class="flex space-x-2">
             @foreach($topColors as $color)
                 @php
@@ -50,7 +50,7 @@
                     $hex = sprintf("#%06X", $color);
                 @endphp
                 <div 
-                    class="w-10 h-10 rounded-md border shadow-sm" 
+                    class="w-10 h-10 rounded-md border shadow-sm"           
                     style="background-color: {{ $hex }}" 
                     title="{{ $hex }}">
                 </div>
@@ -59,8 +59,6 @@
     </div>
 @endif
 
-
-        
 
 
                     <!-- Button Container -->

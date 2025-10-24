@@ -7,13 +7,13 @@ use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 use App\Models\Artwork;
 
-class ArtworkSeeder extends Seeder
+class ArtworkSeeder extends Seeder            // Seeder for artworks table
 {
     public function run(): void
     {
-        $currentTimestamp = Carbon::now();
+        $currentTimestamp = Carbon::now();          // get current timestamp
 
-        Artwork::insert([
+        Artwork::insert([                   // insert multiple artworks
             [
                 'title' => 'Starry Night',
                 'genre' => 'Post-Impressionism',

@@ -12,28 +12,25 @@ class ArtworkController extends Controller
    
     public function index()
     {
-
         
-        $artworks = Artwork::all();
-        // $artworks = \App\Models\Artwork::all();
-        return view('artworks.index', compact('artworks'));
+        $artworks = Artwork::all();         // fetch all artworks
+        return view('artworks.index', compact('artworks'));  // pass artworks to view
         
     }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
        
-        return view('artworks.create');
+        return view('artworks.create');      // show create form
 
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request)      // store new artwork
     {
         $request->validate([
         'title' => 'required|string|max:255',
@@ -52,7 +49,7 @@ class ArtworkController extends Controller
     }
 
     // Save artwork
-    Artwork::create([
+    Artwork::create([                   // create new artwork
         'title' => $request->title,
         'genre' => $request->genre,
         'image' => $imageName ?? null,
@@ -61,7 +58,7 @@ class ArtworkController extends Controller
         'price' => $request->price,
         'comments' => $request->comments ?? null,
     ]);
-        return redirect()->route('artworks.index')->with('success', 'Artwork created!');
+        return redirect()->route('artworks.index')->with('success', 'Artwork created!');      /// redirect to index with success message
 
     }
 
@@ -73,14 +70,14 @@ class ArtworkController extends Controller
        $topColors = [];
 
 try {
-    $imagePath = public_path('images/' . $artwork->image);
+    $imagePath = public_path('images/' . $artwork->image); // Adjust path as needed
 
     if (file_exists($imagePath)) {
-        $palette = Palette::fromFilename($imagePath);
+        $palette = Palette::fromFilename($imagePath);       // create palette
         $extractor = new ColorExtractor($palette);
         $colors = $extractor->extract(10);
 
-        foreach ($colors as $color) {
+        foreach ($colors as $color) { // filter colors
             [$r, $g, $b] = [
                 ($color >> 16) & 0xFF,
                 ($color >> 8) & 0xFF,
@@ -127,7 +124,7 @@ try {
      */
     public function update(Request $request, Artwork $artwork)
     {
-        $request->validate([
+        $request->validate([       // validate input
         'title' => 'required|string|max:255',
         'genre' => 'required|string|max:255',
         'year' => 'required|date',
@@ -165,18 +162,18 @@ try {
 
     // Like system methods
 
-    public function toggleLike(Artwork $artwork)
+    public function toggleLike(Artwork $artwork) //like/unlike
 {
     $artwork->liked = !$artwork->liked; // flip the value
-    $artwork->save();
+    $artwork->save();        // save change
 
-    return back();
+    return back();         // return to previous page
 }
 
-    public function liked()
+    public function liked()      //view liked artworks
 {
-    $artworks = Artwork::where('liked', true)->get();
-    return view('artworks.liked', compact('artworks'));
+    $artworks = Artwork::where('liked', true)->get();     // fetch liked artworks
+    return view('artworks.liked', compact('artworks'));   // pass to view
 }
 
 
