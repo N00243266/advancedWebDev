@@ -1,5 +1,8 @@
 {
     "require-dev": {
         "laravel/breeze": "^2.3"
+    },
+    "require": {
+        "league/color-extractor": "^0.4.0"
     }
 }

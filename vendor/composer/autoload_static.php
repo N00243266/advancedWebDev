@@ -67,6 +67,7 @@ class ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4
         ),
         'L' => 
         array (
+            'League\\ColorExtractor\\' => 22,
             'Laravel\\Prompts\\' => 16,
             'Laravel\\Breeze\\' => 15,
         ),
@@ -197,6 +198,10 @@ class ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4
         array (
             0 => __DIR__ . '/..' . '/psr/clock/src',
         ),
+        'League\\ColorExtractor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/color-extractor/src',
+        ),
         'Laravel\\Prompts\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/prompts/src',
@@ -219,9 +224,9 @@ class ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4
         ),
         'Illuminate\\Support\\' => 
         array (
-            0 => __DIR__ . '/..' . '/illuminate/macroable',
+            0 => __DIR__ . '/..' . '/illuminate/collections',
             1 => __DIR__ . '/..' . '/illuminate/conditionable',
-            2 => __DIR__ . '/..' . '/illuminate/collections',
+            2 => __DIR__ . '/..' . '/illuminate/macroable',
             3 => __DIR__ . '/..' . '/illuminate/support',
         ),
         'Illuminate\\Pipeline\\' => 
