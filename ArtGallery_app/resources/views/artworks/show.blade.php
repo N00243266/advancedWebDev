@@ -35,8 +35,63 @@
                             <p><strong>Year:</strong> {{ $artwork->year }}</p>
                             <p><strong>Artist:</strong> {{ $artwork->artist }}</p>
                             <p><strong>Price:</strong> ${{ $artwork->price }}</p>
-                            <p><strong>Comments:</strong> {{ $artwork->comments }}</p>
+                            <!-- <p><strong>Comments:</strong> {{ $artwork->comments }}</p> -->
                         </div>
+
+
+
+
+
+                         <!-- Comments Section  -->
+                        <h4 class="font-semibold text-md mt-8">User Comments:</h4>
+                        @if($artwork->comments=null)
+                            <p class="text-gray-600">No comments yet.</p>
+                        @else
+                        <ul class="mt-4 space-y-4">
+                            @foreach($artwork->comments() as $comment)
+                                <li class="bg-gray-100 p-4 rounded-md">
+                                    <p class="font-semibold">{{ $comment->user->name }}({{ $comment->rating }})</p>
+                                    <p>Rating: {{ $comment->rating }} / 5</p>
+                                    <p>{{ $comment->content }}</p>
+                                </li>
+                            @endforeach
+                        </ul>
+                        @endif
+
+                        <!-- Add Comment Form -->
+                         <h4 class="font-semibold text-md mt-8">Add a Comment:</h4>
+                         <form action="{{ route('comments.store', $artwork) }}" method="POST" class="mt-4">
+                             @csrf
+                             <div class="mt-4">
+                                 <label for="rating" class="block font-medium text-sm text-gray-700">Rating</label>
+                                 <select name="rating" id="rating" class="mt-1 block w-full" required>
+                                     <option value="1">1</option>
+                                     <option value="2">2</option>
+                                     <option value="3">3</option>
+                                     <option value="4">4</option>
+                                     <option value="5">5</option>
+                                 </select>
+                             </div>
+                                
+            
+                             <div class="mb-4">
+                                 <label for="content" class="block font-medium text-sm text-gray-700">Comment</label>
+                                 <textarea name="content" id="content" rows="3" class="mt-1 block w-full" placeholder="Enter your comment here..."></textarea>
+                             </div>
+                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                     Submit Comment
+                                 </button>
+                             </div>
+                            </form>
+
+
+
+
+
+
+
+
+
                     </div>
 
 

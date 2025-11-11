@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;          // Profile controller
 use App\Http\Controllers\ArtworkController;         // Artwork controller
+use App\Http\Controllers\CommentController;         // Comment controller
 use Illuminate\Support\Facades\Route;              // Route facade
 
 Route::get('/', function () {                     // Home route
@@ -36,3 +37,5 @@ Route::get('/liked-artworks', [ArtworkController::class, 'liked'])->name('artwor
 require __DIR__.'/auth.php';
 
 
+Route::resource('comments', CommentController::class)->except(['store']); // Comment resource routes except store
+Route::post('artworks/{artwork}/comments', [CommentController::class, 'store'])->name('comments.store');

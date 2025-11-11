@@ -22,5 +22,10 @@ class Artwork extends Model         // Artwork model
           'liked',
      ];
 
+     public function comments()        // relationship with comments
+     {
+         return $this->hasMany(Comment::class);
+     }
+
 
 }

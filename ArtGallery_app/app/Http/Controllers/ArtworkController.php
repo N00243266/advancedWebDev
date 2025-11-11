@@ -22,6 +22,10 @@ class ArtworkController extends Controller
      */
     public function create()
     {
+
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('artworks.index')->with('error', 'Access denied.');
+        }
        
         return view('artworks.create');      // show create form
 
@@ -67,6 +71,7 @@ class ArtworkController extends Controller
      */
     public function show(Artwork $artwork)
     {
+       
        $topColors = [];
 
 try {
@@ -105,8 +110,10 @@ try {
 } catch (\Exception $e) {
     // silently ignore errors
 }
+     $artwork->load('comments.user'); // eager load comments with user data
+       
 
-
+    
     return view('artworks.show', compact('artwork', 'topColors'));
     }
 

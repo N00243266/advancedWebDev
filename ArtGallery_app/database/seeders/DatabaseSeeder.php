@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(ArtworkSeeder::class);
+        $this->call(CommentSeeder::class);
         // User::factory(10)->create();
 
         // User::factory()->create([

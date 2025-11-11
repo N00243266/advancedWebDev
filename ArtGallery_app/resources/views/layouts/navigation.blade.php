@@ -28,6 +28,17 @@
                 </div>
             </div>
 
+            <!-- @if(auth()->user()->role === 'admin')
+            <x-nav-link :href="route('artworks.create')" :active="request()->routeIs('artworks.create')">
+                {{ __('Create New Artwork') }}
+            </x-nav-link>
+            @endif -->
+
+
+
+
+
+
             <!-- Settings Dropdown -->
             @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">

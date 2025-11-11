@@ -36,10 +36,12 @@
                             <!-- Button Container -->
                             <div class="flex justify-between items-center mt-4">
                                 <!-- Edit Button -->
-                                <a href="{{ route('artworks.edit', $artwork) }}" class="rounded-md hover:bg-gray-100 px-4 py-2 text-black">
-                                    Edit
-                                </a>
-                                
+                                 @if(auth()->user()->role === 'admin')
+                                    <a href="{{ route('artworks.edit', $artwork) }}" class="rounded-md hover:bg-gray-100 px-4 py-2 text-black">
+                                        Edit
+                                    </a>
+                                @endif
+
                                 <!-- Heart Icon (Like Button) -->
                                 <form action="{{ route('artworks.toggleLike', $artwork->id) }}" method="POST" class="flex items-center">
                                     @csrf
@@ -66,6 +68,7 @@
                                 </form>
 
                                 <!-- Delete Button -->
+                                    @if(auth()->user()->role === 'admin')
                                 <form action="{{ route('artworks.destroy', $artwork->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this artwork?');">
                                     @csrf
                                     @method('DELETE')
@@ -73,6 +76,7 @@
                                         Delete Artwork
                                     </button>
                                 </form>
+                                    @endif
                             </div>
                         </div>
                         @endforeach
