@@ -35,20 +35,18 @@
                             <p><strong>Year:</strong> {{ $artwork->year }}</p>
                             <p><strong>Artist:</strong> {{ $artwork->artist }}</p>
                             <p><strong>Price:</strong> ${{ $artwork->price }}</p>
-                            <!-- <p><strong>Comments:</strong> {{ $artwork->comments }}</p> -->
+                            <p><strong>Author comments:</strong> {{ $artwork->commentsA }}</p>
                         </div>
-
-
 
 
 
                          <!-- Comments Section  -->
                         <h4 class="font-semibold text-md mt-8">User Comments:</h4>
-                        @if($artwork->comments=null)
+                        @if($comments==null)
                             <p class="text-gray-600">No comments yet.</p>
                         @else
                         <ul class="mt-4 space-y-4">
-                            @foreach($artwork->comments() as $comment)
+                            @foreach($comments as $comment)
                                 <li class="bg-gray-100 p-4 rounded-md">
                                     <p class="font-semibold">{{ $comment->user->name }}({{ $comment->rating }})</p>
                                     <p>Rating: {{ $comment->rating }} / 5</p>

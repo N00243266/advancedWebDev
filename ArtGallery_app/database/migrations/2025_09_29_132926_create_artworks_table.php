@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('artist');
             $table->date('year');
             $table->string('price');
-            $table->text('comments');
-            $table->timestamps();
+            $table->text('commentsA');
+            $table->timestamps(); 
         });
     }
 

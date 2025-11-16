@@ -97,13 +97,13 @@
 
     <!-- Comments -->
     <div>
-        <label for="comments" class="block text-sm font-medium text-gray-700">Comments</label>
+        <label for="commentsA" class="block text-sm font-medium text-gray-700">Comments</label>
         <textarea
-            name="comments"
-            id="comments"
+            name="commentsA"
+            id="commentsA"
             rows="4"
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-        >{{ old('comments', $artwork->comments ?? '') }}</textarea>
+        >{{ old('commentsA', $artwork->commentsA ?? '') }}</textarea>
     </div>
 
     <!-- Submit Button -->

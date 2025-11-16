@@ -1,4 +1,4 @@
-@props(['title', 'image', 'genre', 'year', 'artist', 'price', 'comments'])
+@props(['title', 'image', 'genre', 'year', 'artist', 'price', 'commentsA'])
 
 <div class="border rounded-lg shadow-md bg-white text-gray-900 
             transition-transform duration-300 ease-in-out 
@@ -26,7 +26,7 @@
         </div>
         <div class="mt-auto">
             <p class="font-semibold text-gray-400">Price: ${{ $price }}</p>
-            <p class="text-sm text-gray-900">{{ $comments }}</p>
+            <p class="text-sm text-gray-900">{{ $commentsA }}</p>
         </div>
     </div>
 

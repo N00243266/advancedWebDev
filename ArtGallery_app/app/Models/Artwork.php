@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;        // Eloquent model
 
+use App\Models\Comment;               // Import Comment model
+
 class Artwork extends Model         // Artwork model
 {
     use HasFactory;
@@ -18,7 +20,7 @@ class Artwork extends Model         // Artwork model
          'artist',
          'year',
          'price',
-         'comments',
+         'commentsA',
           'liked',
      ];
 

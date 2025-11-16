@@ -43,7 +43,7 @@ class ArtworkController extends Controller
         'year' => 'required|date',
         'artist' => 'required|string|max:255',
         'price' => 'required|numeric',
-        'comments' => 'nullable|string',
+        'commentsA' => 'nullable|string',
     ]);
 
     // Store image in public/images
@@ -60,7 +60,7 @@ class ArtworkController extends Controller
         'year' => $request->year,
         'artist' => $request->artist,
         'price' => $request->price,
-        'comments' => $request->comments ?? null,
+        'commentsA' => $request->commentsA ?? null,
     ]);
         return redirect()->route('artworks.index')->with('success', 'Artwork created!');      /// redirect to index with success message
 
@@ -110,11 +110,9 @@ try {
 } catch (\Exception $e) {
     // silently ignore errors
 }
-     $artwork->load('comments.user'); // eager load comments with user data
-       
+     $comments = $artwork->comments()->get(); // eager load comments with user data
 
-    
-    return view('artworks.show', compact('artwork', 'topColors'));
+    return view('artworks.show', compact('artwork', 'topColors'))->with('comments', $comments); // pass artwork and colors to view
     }
 
     /**
@@ -137,7 +135,7 @@ try {
         'year' => 'required|date',
         'artist' => 'required|string|max:255',
         'price' => 'required|numeric',
-        'comments' => 'nullable|string',
+        'commentsA' => 'nullable|string',
         'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
     ]);
 
@@ -147,7 +145,7 @@ try {
         $artwork->image = $imageName;
     }
 
-    $artwork->update($request->only(['title', 'genre', 'year', 'artist', 'price', 'comments']));
+    $artwork->update($request->only(['title', 'genre', 'year', 'artist', 'price', 'commentsA']));
 
     return redirect()->route('artworks.index')->with('success', 'Artwork updated successfully!');
     }

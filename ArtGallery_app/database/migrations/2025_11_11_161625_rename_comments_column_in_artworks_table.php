@@ -6,22 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::table('artworks', function (Blueprint $table) {
-               $table->text('commentsA')->default('')->change();
+              $table->renameColumn('comments', 'commentsA'); // rename column
+            //
         });
     }
 
-
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::table('artworks', function (Blueprint $table) {
-               $table->text('commentsA')->default(null)->change();
+             $table->renameColumn('commentsA', 'comments'); // rollback
+            //
         });
     }
 };
-
-
-

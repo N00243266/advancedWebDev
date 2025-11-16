@@ -20,7 +20,7 @@
                                 :year="$artwork->year"
                                 :artist="$artwork->artist"
                                 :price="$artwork->price"
-                                :comments="$artwork->comments"
+                                :commentsA="$artwork->commentsA"
                                 :liked="$artwork->liked"
                             />
                         @endforeach                  <!-- End loop -->

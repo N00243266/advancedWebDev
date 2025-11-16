@@ -22,7 +22,7 @@ class ArtworkSeeder extends Seeder            // Seeder for artworks table
                 'artist' => 'Vincent van Gogh',
                 'year' => '1889-06-01',
                 'price' => '$100 million',
-                'comments' => 'One of the most recognized pieces of art in the world.',
+                'commentsA' => 'One of the most recognized pieces of art in the world.',
             ],
             [
                 'title' => 'Mona Lisa',
@@ -32,7 +32,7 @@ class ArtworkSeeder extends Seeder            // Seeder for artworks table
                 'artist' => 'Leonardo da Vinci',
                 'year' => '1503-10-01',
                 'price' => '$860 million',
-                'comments' => 'Famous for her enigmatic expression.',
+                'commentsA' => 'Famous for her enigmatic expression.',
             ],
             [
                 'title' => 'The Persistence of Memory',
@@ -42,7 +42,7 @@ class ArtworkSeeder extends Seeder            // Seeder for artworks table
                 'artist' => 'Salvador Dalí',
                 'year' => '1931-04-01',
                 'price' => '$150 million',
-                'comments' => "Known for its melting clocks.",
+                'commentsA' => "Known for its melting clocks.",
             ],
 
           

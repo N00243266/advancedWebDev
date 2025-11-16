@@ -1,4 +1,4 @@
-props(['title', 'genre', 'image', 'year', 'artist', 'price', 'comments'])
+props(['title', 'genre', 'image', 'year', 'artist', 'price', 'commentsA'])
 <div class="border rounded-lg shadow-md p-6 bg-white hover:shadow-lg transition duration-300 max-w-xl mx-auto"> <!-- Limit the overall container width to make the component more compact -->
 <!--  Title -->
 <h1 class="font-bold text-black-600 mb-2" style="font-size: 3rem;">{{ $title }}</h1> <!-- Heading with larger text and color -->
