@@ -61,6 +61,11 @@ class CommentController extends Controller
     public function edit(Comment $comment)
     {
         //
+        if (auth()->user()->id !== $comment->user_id && auth()->user()->role !== 'admin') {
+            return redirect()->route('artworks.show', $comment->artwork_id)->with('error', 'Access denied.');
+        }
+        return view('comments.edit', compact('comment'));
+        
     }
 
     /**
@@ -68,14 +73,36 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
-    }
+       $request->validate([
+        'rating' => 'required|integer|min:1|max:5',
+        'content' => 'nullable|string|max:1000',
+    ]);
 
+    $comment->rating  = $request->rating;
+    $comment->content = $request->content;
+    
+    $comment->save();
+
+    return redirect()
+        ->route('artworks.show', $comment->artwork_id)
+        ->with('success', 'Comment updated successfully.');
+}
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Comment $comment)
     {
         //
+         if (auth()->id() !== $comment->user_id && auth()->user()->role !== 'admin') {
+        return redirect()->back()->with('error', 'Access denied.');
+    }
+
+    $artworkId = $comment->artwork_id;
+
+    $comment->delete();
+
+    return redirect()
+        ->route('artworks.show', $artworkId)
+        ->with('success', 'Comment deleted.');
     }
 }

@@ -71,6 +71,7 @@ class ArtworkController extends Controller
      */
     public function show(Artwork $artwork)
     {
+       $artwork = Artwork::with('comments.user')->findOrFail($artwork->id);
        
        $topColors = [];
 
@@ -110,9 +111,12 @@ try {
 } catch (\Exception $e) {
     // silently ignore errors
 }
-     $comments = $artwork->comments()->get(); // eager load comments with user data
-
-    return view('artworks.show', compact('artwork', 'topColors'))->with('comments', $comments); // pass artwork and colors to view
+   
+    return view('artworks.show', [
+        'artwork'   => $artwork,
+        'topColors' => $topColors,
+        'comments'  => $artwork->comments,
+    ]);
     }
 
     /**

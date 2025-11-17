@@ -41,7 +41,8 @@
 
 
                          <!-- Comments Section  -->
-                        <h4 class="font-semibold text-md mt-8">User Comments:</h4>
+
+                        <!-- <h4 class="font-semibold text-md mt-8">User Comments:</h4>
                         @if($comments==null)
                             <p class="text-gray-600">No comments yet.</p>
                         @else
@@ -54,7 +55,56 @@
                                 </li>
                             @endforeach
                         </ul>
-                        @endif
+                        @endif -->
+
+                   <h4 class="font-semibold text-md mt-8">User Comments:</h4>
+
+@if($comments->isEmpty())
+    <p class="text-gray-600">No comments yet.</p>
+@else
+    <ul class="mt-4 space-y-4">
+        @foreach($comments as $comment)
+            <li class="bg-gray-100 p-4 rounded-md">
+                <p class="font-semibold">
+                    {{ $comment->user->name }} ({{ $comment->rating }})
+                </p>
+                <p>Rating: {{ $comment->rating }} / 5</p>
+                <p>{{ $comment->content }}</p>
+
+                @auth
+                    @if ($comment->user_id === auth()->id() || auth()->user()->role === 'admin')
+                        <div class="mt-2 flex space-x-2">
+
+                            <!-- Edit Comment -->
+                            <a href="{{ route('comments.edit', $comment->id) }}"
+                               class="text-blue-500 hover:underline">
+                                Edit
+                            </a>
+
+                            <!-- Delete Comment -->
+                            <form action="{{ route('comments.destroy', $comment->id) }}" method="POST"
+                                  onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 hover:underline">
+                                    Delete
+                                </button>
+                            </form>
+
+                        </div>
+                    @endif
+                @endauth
+
+            </li>
+        @endforeach
+    </ul>
+@endif
+
+
+
+
+
+
 
                         <!-- Add Comment Form -->
                          <h4 class="font-semibold text-md mt-8">Add a Comment:</h4>
@@ -79,13 +129,7 @@
                                  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                      Submit Comment
                                  </button>
-                             </div>
                             </form>
-
-
-
-
-
 
 
 
