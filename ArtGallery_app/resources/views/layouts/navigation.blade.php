@@ -25,6 +25,14 @@
                     <x-nav-link :href="route('artworks.liked')" :active="request()->routeIs('artworks.liked')">
                         {{ __('❤️ Liked Artworks') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('galleries.index')" :active="request()->routeIs('galleries.index')">
+                      {{ __('View All Galleries') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('galleries.create')" :active="request()->routeIs('galleries.create')">
+                      {{ __('Add a New Gallery') }}
+                    </x-nav-link>
+
+
                 </div>
             </div>
 

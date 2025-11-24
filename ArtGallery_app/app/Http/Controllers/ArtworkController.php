@@ -111,11 +111,13 @@ try {
 } catch (\Exception $e) {
     // silently ignore errors
 }
+      $galleries = $artwork->galleries;
    
     return view('artworks.show', [
         'artwork'   => $artwork,
         'topColors' => $topColors,
          'comments' => $artwork->comments,
+         'galleries' => $galleries,
     ]);
     }
 
