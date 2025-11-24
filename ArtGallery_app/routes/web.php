@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 // -------------------------------------------------------------
@@ -67,6 +68,17 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
         ->name('comments.destroy');
+
+
+
+    // ---------------------------------------------------------
+    // Galleries CRUD
+    // ---------------------------------------------------------
+    // Route::resource('galleries', GalleryController::class);
+    Route::resource('galleries', GalleryController::class)->middleware('auth');
+
+
+
 });
 
 // -------------------------------------------------------------

@@ -11,10 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('artworks', function (Blueprint $table) {
-              $table->renameColumn('comments', 'commentsA'); // rename column
-            //
-        });
+      
     }
 
     /**
@@ -22,9 +19,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('artworks', function (Blueprint $table) {
-             $table->renameColumn('commentsA', 'comments'); // rollback
-            //
-        });
+      
     }
 };

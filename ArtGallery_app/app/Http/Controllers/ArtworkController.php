@@ -115,7 +115,7 @@ try {
     return view('artworks.show', [
         'artwork'   => $artwork,
         'topColors' => $topColors,
-        'comments'  => $artwork->comments,
+         'comments' => $artwork->comments,
     ]);
     }
 

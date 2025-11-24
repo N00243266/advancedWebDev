@@ -29,5 +29,9 @@ class Artwork extends Model         // Artwork model
          return $this->hasMany(Comment::class);
      }
 
+        public function galleries()        // relationship with galleries
+        {
+            return $this->belongsToMany(Gallery::class);
+        }
 
 }

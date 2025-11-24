@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 use App\Models\Artwork;
+use App\Models\Gallery;
 
 class ArtworkSeeder extends Seeder            // Seeder for artworks table
 {
@@ -13,7 +14,7 @@ class ArtworkSeeder extends Seeder            // Seeder for artworks table
     {
         $currentTimestamp = Carbon::now();          // get current timestamp
 
-        Artwork::insert([                   // insert multiple artworks
+        $artworks = ([                   // insert multiple artworks
             [
                 'title' => 'Starry Night',
                 'genre' => 'Post-Impressionism',
@@ -48,5 +49,17 @@ class ArtworkSeeder extends Seeder            // Seeder for artworks table
           
         ]);
 
+         foreach ($artworks as $artworkData) {
+
+            // Create artwork
+            $artwork = Artwork::create(array_merge($artworkData, [
+                'created_at' => $currentTimestamp,
+                'updated_at' => $currentTimestamp,
+            ]));
+
+            // Attach random galleries
+            $galleries = Gallery::inRandomOrder()->take(rand(1, 3))->pluck('id');
+            $artwork->galleries()->attach($galleries);
+        }
     }
 }

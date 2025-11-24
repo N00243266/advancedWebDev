@@ -10,7 +10,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h3 class="font-semibold text-lg mb-4">{{ $artwork->title }}</h3>                       <!-- subtitle showing artwork title -->
+                    <h3 class="font-bold text-3xl mt-5 mb-7 ml-7">{{ $artwork->title }}</h3>                       <!-- subtitle showing artwork title -->
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <!-- Image -->
@@ -36,6 +36,41 @@
                             <p><strong>Artist:</strong> {{ $artwork->artist }}</p>
                             <p><strong>Price:</strong> ${{ $artwork->price }}</p>
                             <p><strong>Author comments:</strong> {{ $artwork->commentsA }}</p>
+
+
+
+                    @if(!empty($topColors))
+    <div class="mt-6">
+        <h4 class="font-semibold mb-2">Color Palette:</h4>                  <!-- subtitle for color palette -->
+        <div class="flex space-x-2">
+            @foreach($topColors as $color)
+                @php
+                    // Convert integer color to hex code
+                    $hex = sprintf("#%06X", $color);
+                @endphp
+                <div 
+                    class="w-10 h-10 rounded-md border shadow-sm"           
+                    style="background-color: {{ $hex }}" 
+                    title="{{ $hex }}">
+                </div>
+            @endforeach
+        </div>
+    </div>
+@endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </div>
 
 
@@ -65,10 +100,41 @@
     <ul class="mt-4 space-y-4">
         @foreach($comments as $comment)
             <li class="bg-gray-100 p-4 rounded-md">
-                <p class="font-semibold">
+
+
+
+            
+
+
+
+                <!-- <p class="font-semibold">
                     {{ $comment->user->name }} ({{ $comment->rating }})
                 </p>
-                <p>Rating: {{ $comment->rating }} / 5</p>
+                <p>Rating: {{ $comment->rating }} / 5</p> -->
+
+                <p class="font-semibold flex items-center space-x-2">
+                <span>{{ $comment->user->name }}</span>
+
+                <span class="flex">
+                @for ($i = 1; $i <= 5; $i++)
+                @if ($i <= $comment->rating)
+                <!-- Filled star -->
+                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.39 2.46a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.39-2.46a1 1 0 00-1.176 0L6.16 18.06c-.784.57-1.838-.196-1.539-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.154 9.394c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.967z"/>
+                    </svg>
+                    @else
+                <!-- Empty star -->
+                     <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.39 2.46a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.39-2.46a1 1 0 00-1.176 0L6.16 18.06c-.784.57-1.838-.196-1.539-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.154 9.394c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.967z"/>
+                    </svg>
+                    @endif
+                   @endfor
+                  </span>
+                 </p>
+
+
+
+
                 <p>{{ $comment->content }}</p>
 
                 @auth
@@ -136,25 +202,22 @@
 
                     </div>
 
+ 
 
-                    @if(!empty($topColors))
-    <div class="mt-6">
-        <h4 class="font-semibold mb-2">Color Palette:</h4>                  <!-- subtitle for color palette -->
-        <div class="flex space-x-2">
-            @foreach($topColors as $color)
-                @php
-                    // Convert integer color to hex code
-                    $hex = sprintf("#%06X", $color);
-                @endphp
-                <div 
-                    class="w-10 h-10 rounded-md border shadow-sm"           
-                    style="background-color: {{ $hex }}" 
-                    title="{{ $hex }}">
-                </div>
-            @endforeach
-        </div>
-    </div>
-@endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
