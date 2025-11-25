@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Gallery;
+use App\Models\ArtWork;
 
 class GallerySeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class GallerySeeder extends Seeder
      */
     public function run(): void
 {
-    Gallery::insert([
+    $galleries = [
         [
             'name' => 'Gormley’s Art Gallery',
             'location' => 'Dublin, Ireland',
@@ -50,7 +51,15 @@ class GallerySeeder extends Seeder
             'image' => 'royal_hibernian_academy.jpg',
             'description' => 'One of Ireland’s leading art institutions showcasing dynamic exhibitions and Irish artists.',
         ],
-    ]);
+    ];
+
+    foreach ($galleries as $galleryData) {
+       $gallery = Gallery::create($galleryData);
+
+       $galleryArtworks = Artwork::inRandomOrder()->take(3)->pluck('id');
+
+       $gallery->artworks()->attach($galleryArtworks);
+    }
 }
 
 }
