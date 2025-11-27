@@ -26,7 +26,10 @@
                                     <p class="text-gray-600">{{ $gallery->location }}</p>
 
                                     @if($gallery->image)
-                                        <img src="{{ asset($gallery->image) }}" class="mt-3 rounded-lg w-full h-48 object-cover">
+                                          <img src="{{ asset('images/' . $gallery->image) }}" 
+                       alt="{{ $gallery->name }}" 
+                       class="rounded-lg w-full max-h-96 object-cover mb-6">
+                                        
                                     @endif
                                 </a>
 

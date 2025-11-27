@@ -265,25 +265,52 @@
             </div>
         </div>
     </div>
-    <!-- Galleries Section -->
-     <div class="pb-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-6">
-                {{ __('Galleries Featuring This Artwork') }}                     <!-- header for galleries section -->
-            </h2>
-        </div>
+
+
+
+<!-- Galleries Section -->
+<div class="pb-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <h2 class=" font-semibold text-xl text-gray-800 leading-tight mb-6">
+            {{ __('Dublin Galleries') }}
+        </h2>
+    </div>
+
     @foreach($galleries as $gallery)
     <a href="{{ route('galleries.show', $gallery->id) }}">
-            <div class="mt-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
-                        <h3 class="font-bold text-2xl mt-5 mb-7 ml-7">{{ $gallery->name }}</h3> <!-- Gallery name -->
+        <div class="mt-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 flex items-center justify-between">
 
-                        <p class="ml-7">{{ $gallery->description }}</p> <!-- Gallery description -->
+                    <!-- LEFT SIDE: Title + Description -->
+                    <div class="w-2/3">
+                        <h3 class="font-bold text-2xl mb-5">{{ $gallery->name }}</h3>
+                        <p>{{ $gallery->description }}</p>
                     </div>
+
+                   
+
+                          <!-- RIGHT: Image -->
+                        @if($gallery->image)
+                            <div class="w-1/3">
+                                <img
+                                    src="{{ asset('images/' . $gallery->image) }}"
+                                    alt="{{ $gallery->name }}"
+                                    class="rounded-lg object-cover w-full h-40 shadow-md"
+                                >
+                            </div>
+                        @endif
+
+
+
                 </div>
             </div>
-            </a>
+        </div>
+    </a>
     @endforeach
+</div>
+
+
+
     </div>
 </x-app-layout>

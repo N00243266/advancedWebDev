@@ -9,16 +9,29 @@
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm rounded-lg p-6">
 
+
+
+
+                {{-- IMAGE --}}
+                @if($gallery->image)
+                    <img src="{{ asset('images/' . $gallery->image) }}" 
+                         alt="{{ $gallery->name }}" 
+                         class="rounded-lg w-full max-h-96 object-cover mb-6">
+                @else
+                    <p class="text-gray-500 italic mb-6">No image available.</p>
+                @endif
+
+
+
+
+
+
                 <!-- Gallery Details -->
                 <h3 class="text-2xl font-bold mb-2">{{ $gallery->name }}</h3>
                 <p class="text-gray-600 mb-4">{{ $gallery->location }}</p>
                 <p class="text-gray-600 mb-6">{{ $gallery->description }}</p>
 
-                @if($gallery->image)
-                    <img src="{{ asset($gallery->image) }}" 
-                        alt="{{ $gallery->name }}" 
-                        class="rounded-lg w-full max-h-96 object-cover mb-6">
-                @endif
+                {{-- ARTWORKS COUNT --}}
 
                 <!-- Edit & Delete Buttons -->
                 <div class=" text-gray-600 flex gap-4 mb-10">

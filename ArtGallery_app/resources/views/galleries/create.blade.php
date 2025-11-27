@@ -14,12 +14,12 @@
 
                     <div class="mb-4">
                         <label class="text-gray-900 block font-semibold mb-1">Gallery Name</label>
-                        <input type="text" name="name" class="w-full border rounded p-2" required>
+                        <input type="text" name="name" class="w-full border rounded p-2 text-gray-900" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="text-gray-900 block font-semibold mb-1">Location</label>
-                        <input type="text" name="location" class="w-full border rounded p-2" required>
+                        <input type="text" name="location" class="w-full border rounded p-2 text-gray-900" required>
                     </div>
 
                     <!-- <div class="mb-4">
@@ -34,7 +34,7 @@
                       type="file"
                     name="image"
                            id="image"
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm "
                            {{ isset($artwork) ? '' : 'required' }}
                       />
                       @isset($artwork->image)
@@ -47,7 +47,7 @@
 
                     <div class="mb-4">
                         <label class="text-gray-900 block font-semibold mb-1">Description</label>
-                        <textarea name="description" class="w-full border rounded p-2"></textarea>
+                        <textarea name="description" class="w-full border rounded p-2 text-gray-900"></textarea>
                     </div>
 
                     <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
