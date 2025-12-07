@@ -9,12 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up(): void // Create the pivot table for artworks and galleries
     {
         Schema::create('artwork_gallery', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('artwork_id')->constrained()->onDelete('cascade');
-            $table->foreignId('gallery_id')->constrained()->onDelete('cascade');
+            $table->foreignId('artwork_id')->constrained()->onDelete('cascade'); // Foreign key to artworks table
+            $table->foreignId('gallery_id')->constrained()->onDelete('cascade'); // Foreign key to galleries table
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('artwork_gallery');
+        Schema::dropIfExists('artwork_gallery'); // Drop the pivot table
     }
 };

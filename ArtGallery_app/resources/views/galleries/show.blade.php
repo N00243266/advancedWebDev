@@ -35,11 +35,14 @@
 
                 <!-- Edit & Delete Buttons -->
                 <div class=" text-gray-600 flex gap-4 mb-10">
+                    @if(auth()->user()->role === 'admin')
                     <a href="{{ route('galleries.edit', $gallery->id) }}"
                        class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
                         Edit
                     </a>
+                    @endif
 
+                    @if(auth()->user()->role === 'admin')
                     <form action="{{ route('galleries.destroy', $gallery->id) }}" method="POST"
                           onsubmit="return confirm('Are you sure you want to delete this gallery?');">
                         @csrf
@@ -49,6 +52,7 @@
                             Delete
                         </button>
                     </form>
+                    @endif
                 </div>
 
                 <!-- Artworks in this Gallery -->

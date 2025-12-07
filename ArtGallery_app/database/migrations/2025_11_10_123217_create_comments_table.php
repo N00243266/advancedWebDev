@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('artwork_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('artwork_id')->constrained()->onDelete('cascade');  //foreign key to artworks table
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');  //foreign key to users table 
             $table->text('content');
             $table->integer('rating')->unsigned()->default(1);
             $table->timestamps();

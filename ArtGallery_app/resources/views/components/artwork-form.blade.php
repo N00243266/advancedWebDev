@@ -1,4 +1,4 @@
-@props(['action', 'method' => 'POST', 'artwork' => null])
+@props(['action', 'method' => 'POST', 'artwork' => null,  'galleries' => [], 'selectedGalleries' => []])
 
 <form action="{{ $action }}" method="POST" enctype="multipart/form-data" class="space-y-6">
     @csrf
@@ -105,6 +105,34 @@
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
         >{{ old('commentsA', $artwork->commentsA ?? '') }}</textarea>
     </div>
+
+
+
+    <!-- Galleries Multi-Select -->
+     <div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700">Assign to Galleries</label>
+
+    <select name="galleries[]" multiple class="w-full border rounded p-2">
+        @foreach($galleries as $gallery)
+            <option 
+                value="{{ $gallery->id }}"
+                @if(in_array($gallery->id, $selectedGalleries)) selected @endif
+            >
+                {{ $gallery->name }}
+            </option>
+        @endforeach
+    </select>
+
+    <p class="text-sm text-gray-500 mt-1">Hold CTRL (Windows) or CMD (Mac) to select multiple</p>
+   </div>
+
+
+
+
+
+
+
+
 
     <!-- Submit Button -->
     <div>

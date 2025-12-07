@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
+use App\Models\Gallery;
 use Illuminate\Http\Request; 
 use League\ColorExtractor\Palette;  //for color palette
 use League\ColorExtractor\ColorExtractor; //for color extraction
@@ -27,7 +28,9 @@ class ArtworkController extends Controller
             return redirect()->route('artworks.index')->with('error', 'Access denied.');
         }
        
-        return view('artworks.create');      // show create form
+        $galleries = Gallery::all();
+
+        return view('artworks.create', compact('galleries'));     // pass galleries to view
 
     }
 
@@ -36,6 +39,7 @@ class ArtworkController extends Controller
      */
     public function store(Request $request)      // store new artwork
     {
+        //    dd($request);
         $request->validate([
         'title' => 'required|string|max:255',
         'genre' => 'required|string|max:255',
@@ -44,6 +48,8 @@ class ArtworkController extends Controller
         'artist' => 'required|string|max:255',
         'price' => 'required|numeric',
         'commentsA' => 'nullable|string',
+        'galleries' => 'nullable|array',
+        'galleries.*' => 'integer|exists:galleries,id'
     ]);
 
     // Store image in public/images
@@ -53,7 +59,8 @@ class ArtworkController extends Controller
     }
 
     // Save artwork
-    Artwork::create([                   // create new artwork
+    // Artwork::create([  
+    $artwork = Artwork::create([               
         'title' => $request->title,
         'genre' => $request->genre,
         'image' => $imageName ?? null,
@@ -62,6 +69,14 @@ class ArtworkController extends Controller
         'price' => $request->price,
         'commentsA' => $request->commentsA ?? null,
     ]);
+
+
+           //  ATTACH SELECTED GALLERIES
+    if ($request->has('galleries')) {
+        $artwork->galleries()->attach($request->galleries);
+    }
+
+
         return redirect()->route('artworks.index')->with('success', 'Artwork created!');      /// redirect to index with success message
 
     }
@@ -126,9 +141,20 @@ try {
      */
     public function edit(Artwork $artwork)
     {
-        
-        return view('artworks.edit', compact('artwork'));
-    }
+
+
+        // Load all galleries for the multi-select
+        $galleries = Gallery::all();
+
+        // Load IDs of galleries already assigned to this artwork
+        $selectedGalleries = $artwork->galleries()->pluck('galleries.id')->toArray();
+
+        return view('artworks.edit', [
+             'artwork' => $artwork,
+             'galleries' => $galleries,
+             'selectedGalleries' => $selectedGalleries
+        ]);
+ }
 
     /**
      * Update the specified resource in storage.
@@ -143,6 +169,8 @@ try {
         'price' => 'required|numeric',
         'commentsA' => 'nullable|string',
         'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        'galleries' => 'nullable|array',
+        'galleries.*' => 'integer|exists:galleries,id'
     ]);
 
     if ($request->hasFile('image')) {
@@ -152,6 +180,11 @@ try {
     }
 
     $artwork->update($request->only(['title', 'genre', 'year', 'artist', 'price', 'commentsA']));
+
+
+    // SYNC SELECTED GALLERIES
+    $artwork->galleries()->sync($request->galleries ?? []);
+
 
     return redirect()->route('artworks.index')->with('success', 'Artwork updated successfully!');
     }

@@ -19,10 +19,10 @@ class Comment extends Model
 
    public function artwork()
    {
-       return $this->belongsTo(Artwork::class);
+       return $this->belongsTo(Artwork::class);   // Relationship: Comment belongs to an Artwork
    }
    public function user()
    {
-       return $this->belongsTo(User::class);
+       return $this->belongsTo(User::class);   // Relationship: Comment belongs to a User
    }
 }

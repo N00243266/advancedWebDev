@@ -19,18 +19,22 @@
                     <x-nav-link :href="route('artworks.index')" :active="request()->routeIs('artworks.index')">
                         {{ __('View All Artworks') }}
                     </x-nav-link>
+                    @if(auth()->user()->role === 'admin')
                     <x-nav-link :href="route('artworks.create')" :active="request()->routeIs('artworks.create')">
                         {{ __('Create New Artwork') }}
                     </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('artworks.liked')" :active="request()->routeIs('artworks.liked')">
                         {{ __('❤️ Liked Artworks') }}
                     </x-nav-link>
                     <x-nav-link :href="route('galleries.index')" :active="request()->routeIs('galleries.index')">
                       {{ __('View All Galleries') }}
                     </x-nav-link>
+                        @if(auth()->user()->role === 'admin')
                     <x-nav-link :href="route('galleries.create')" :active="request()->routeIs('galleries.create')">
                       {{ __('Add a New Gallery') }}
                     </x-nav-link>
+                        @endif
 
 
                 </div>

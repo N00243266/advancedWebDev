@@ -58,19 +58,6 @@
     </div>
 @endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </div>
 
 
@@ -169,16 +156,13 @@
 
 
 
-
-
-
                         <!-- Add Comment Form -->
                          <h4 class="font-semibold text-md mt-8">Add a Comment:</h4>
                          <form action="{{ route('comments.store', $artwork) }}" method="POST" class="mt-4">
                              @csrf
                              <div class="mt-4">
-                                 <label for="rating" class="block font-medium text-sm text-gray-700">Rating</label>
-                                 <select name="rating" id="rating" class="mt-1 block w-full" required>
+                                 <label for="rating" class="block font-medium text-sm text-gray-700">Rating</label>                 <!-- label for rating -->
+                                 <select name="rating" id="rating" class="mt-1 block w-full" required>                <!-- dropdown for rating selection -->
                                      <option value="1">1</option>
                                      <option value="2">2</option>
                                      <option value="3">3</option>
@@ -188,7 +172,7 @@
                              </div>
                                 
             
-                             <div class="mb-4">
+                             <div class="mb-4">                                                                                 <!-- textarea for comment content -->
                                  <label for="content" class="block font-medium text-sm text-gray-700">Comment</label>
                                  <textarea name="content" id="content" rows="3" class="mt-1 block w-full" placeholder="Enter your comment here..."></textarea>
                              </div>
@@ -203,22 +187,6 @@
                     </div>
 
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                     <!-- Button Container -->
@@ -248,17 +216,21 @@
                         </form>
 
                         <!-- Edit Button -->
+                         @if(auth()->user()->role === 'admin')
                         <a href="{{ route('artworks.edit', $artwork->id) }}" class="mt-4 px-4 py-2 text-black rounded-md">
                             Edit 
                         </a>
+                        @endif
 
                         <!-- Delete Button -->
+                         @if(auth()->user()->role === 'admin')
                         <form action="{{ route('artworks.destroy', $artwork->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this artwork?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
                                 Delete Artwork
                             </button>
+                        @endif
                         </form>
                     </div>
                 </div>

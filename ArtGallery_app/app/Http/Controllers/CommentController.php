@@ -30,8 +30,8 @@ class CommentController extends Controller
     public function store(Request $request, Artwork $artwork)
     {  
         $request->validate([
-            'rating' => 'required|integer|min:1|max:5',
-            'content' => 'nullable|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5', // Rating between 1 and 5
+            'content' => 'nullable|string|max:1000',        // Optional content
             
         ]);
 
@@ -61,7 +61,7 @@ class CommentController extends Controller
     public function edit(Comment $comment)
     {
         //
-        if (auth()->user()->id !== $comment->user_id && auth()->user()->role !== 'admin') {
+        if (auth()->user()->id !== $comment->user_id && auth()->user()->role !== 'admin') {           // Access control: only the comment owner or admin can edit
             return redirect()->route('artworks.show', $comment->artwork_id)->with('error', 'Access denied.');
         }
         return view('comments.edit', compact('comment'));
@@ -78,8 +78,8 @@ class CommentController extends Controller
         'content' => 'nullable|string|max:1000',
     ]);
 
-    $comment->rating  = $request->rating;
-    $comment->content = $request->content;
+    $comment->rating  = $request->rating;        // Update rating
+    $comment->content = $request->content;        // Update content
     
     $comment->save();
 
@@ -102,7 +102,7 @@ class CommentController extends Controller
     $comment->delete();
 
     return redirect()
-        ->route('artworks.show', $artworkId)
+        ->route('artworks.show', $artworkId)         // Redirect to the artwork page
         ->with('success', 'Comment deleted.');
     }
 }

@@ -37,12 +37,15 @@
                                 <div class="flex justify-between items-center mt-4">
 
                                     <!-- Edit -->
+                                     @if(auth()->user()->role === 'admin')
                                     <a href="{{ route('galleries.edit', $gallery->id) }}"
                                        class="rounded-md hover:bg-gray-100 px-4 py-2 text-black">
                                         Edit
                                     </a>
+                                    @endif
 
                                     <!-- Delete -->
+                                     @if(auth()->user()->role === 'admin')
                                     <form action="{{ route('galleries.destroy', $gallery->id) }}" method="POST"
                                           onsubmit="return confirm('Delete this gallery?');">
                                         @csrf
@@ -52,6 +55,7 @@
                                             Delete
                                         </button>
                                     </form>
+                                    @endif
 
                                 </div>
 

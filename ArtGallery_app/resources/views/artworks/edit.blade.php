@@ -15,6 +15,9 @@
                      :action=" route('artworks.update', $artwork) "             
                      method="PUT"
                      :artwork="$artwork"
+                     :artwork="$artwork"
+                     :galleries="$galleries"
+                     :selectedGalleries="$selectedGalleries"
                     >
                     </x-artwork-form>
 
